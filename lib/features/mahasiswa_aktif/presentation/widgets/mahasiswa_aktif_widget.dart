@@ -42,28 +42,28 @@ class MahasiswaAktifCard extends StatelessWidget {
           children: [
             // Avatar
             Container(
-              width: 60,
-              height: 60,
+              width: 55,
+              height: 55,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: colors,
                 ),
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(14),
               ),
               child: Center(
                 child: Text(
-                  mahasiswa.nama.substring(0, 1).toUpperCase(),
+                  '${mahasiswa.userId}',
                   style: const TextStyle(
                     color: Colors.white,
-                    fontSize: 24,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
-            const SizedBox(width: 16),
+            const SizedBox(width: 14),
             // Info
             Expanded(
               child: Column(
@@ -73,16 +73,15 @@ class MahasiswaAktifCard extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          mahasiswa.nama,
+                          mahasiswa.title,
                           style: const TextStyle(
-                            fontSize: 16,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                      // Badge status aktif
                       Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 2),
@@ -93,9 +92,9 @@ class MahasiswaAktifCard extends StatelessWidget {
                             color: Colors.green.withValues(alpha: 0.3),
                           ),
                         ),
-                        child: Text(
-                          mahasiswa.status,
-                          style: const TextStyle(
+                        child: const Text(
+                          'Aktif',
+                          style: TextStyle(
                             fontSize: 11,
                             color: Colors.green,
                             fontWeight: FontWeight.w600,
@@ -104,38 +103,32 @@ class MahasiswaAktifCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 6),
-                  _buildInfoRow(Icons.badge_outlined, 'NIM: ${mahasiswa.nim}'),
                   const SizedBox(height: 4),
-                  _buildInfoRow(Icons.email_outlined, mahasiswa.email),
+                  Row(
+                    children: [
+                      Icon(Icons.person_outline,
+                          size: 13, color: Colors.grey[600]),
+                      const SizedBox(width: 4),
+                      Text(
+                        'User ID: ${mahasiswa.userId}',
+                        style:
+                            TextStyle(fontSize: 12, color: Colors.grey[600]),
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 4),
-                  _buildInfoRow(Icons.school_outlined, mahasiswa.jurusan),
-                  const SizedBox(height: 4),
-                  _buildInfoRow(Icons.calendar_today_outlined,
-                      'Semester ${mahasiswa.semester}'),
+                  Text(
+                    mahasiswa.body,
+                    style: TextStyle(fontSize: 12, color: Colors.grey[500]),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ],
               ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildInfoRow(IconData icon, String text) {
-    return Row(
-      children: [
-        Icon(icon, size: 14, color: Colors.grey[600]),
-        const SizedBox(width: 6),
-        Expanded(
-          child: Text(
-            text,
-            style: TextStyle(fontSize: 13, color: Colors.grey[700]),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ),
-      ],
     );
   }
 }

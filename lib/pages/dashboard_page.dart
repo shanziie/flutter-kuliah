@@ -1,54 +1,55 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../providers/dashboard_provider.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:d4tivokasi/features/dosen/presentation/pages/dosen_page.dart';
 
-class DashboardPage extends StatelessWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+class DashboardPage extends ConsumerWidget {
+  const DashboardPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Dashboard'),
         backgroundColor: Colors.blue,
         centerTitle: true,
       ),
-      body: Consumer<DashboardProvider>(
-        builder: (context, provider, child) {
-          return Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: [
-                _buildMenuItem(
-                  context,
-                  'Mahasiswa',
-                  provider.mahasiswa,
-                  Icons.school,
-                  Colors.blue,
-                  provider.tambahMahasiswa,
-                ),
-                const SizedBox(height: 15),
-                _buildMenuItem(
-                  context,
-                  'Dosen',
-                  provider.dosen,
-                  Icons.person,
-                  Colors.green,
-                  provider.tambahDosen,
-                ),
-                const SizedBox(height: 15),
-                _buildMenuItem(
-                  context,
-                  'Mata Kuliah',
-                  provider.matakuliah,
-                  Icons.book,
-                  Colors.orange,
-                  provider.tambahMatakuliah,
-                ),
-              ],
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            _buildMenuItem(
+              context,
+              'Mahasiswa',
+              0,
+              Icons.school,
+              Colors.blue,
+              () {},
             ),
-          );
-        },
+            const SizedBox(height: 15),
+            _buildMenuItem(
+              context,
+              'Dosen',
+              0,
+              Icons.person,
+              Colors.green,
+              () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const DosenPage()),
+                );
+              },
+            ),
+            const SizedBox(height: 15),
+            _buildMenuItem(
+              context,
+              'Mata Kuliah',
+              0,
+              Icons.book,
+              Colors.orange,
+              () {},
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -73,7 +74,7 @@ class DashboardPage extends StatelessWidget {
             children: [
               CircleAvatar(
                 radius: 30,
-                backgroundColor: color.withOpacity(0.2),
+                backgroundColor: color.withValues(alpha: 0.2),
                 child: Icon(icon, size: 35, color: color),
               ),
               const SizedBox(width: 20),
