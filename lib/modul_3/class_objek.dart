@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 
 // =====================
 // CLASS PARENT
@@ -9,9 +10,9 @@ class Mahasiswa {
   String? jurusan;
 
   void tampilkanData() {
-    print("Nama: ${nama ?? 'Belum diisi'}");
-    print("NIM: ${nim ?? 'Belum diisi'}");
-    print("Jurusan: ${jurusan ?? 'Belum diisi'}");
+    debugPrint("Nama: ${nama ?? 'Belum diisi'}");
+    debugPrint("NIM: ${nim ?? 'Belum diisi'}");
+    debugPrint("Jurusan: ${jurusan ?? 'Belum diisi'}");
   }
 }
 
@@ -22,7 +23,7 @@ class MahasiswaAktif extends Mahasiswa {
   int? semester;
 
   void tampilkanStatus() {
-    print("Semester: ${semester ?? 'Belum diisi'}");
+    debugPrint("Semester: ${semester ?? 'Belum diisi'}");
   }
 }
 
@@ -30,26 +31,26 @@ class MahasiswaAlumni extends Mahasiswa {
   int? tahunLulus;
 
   void tampilkanStatus() {
-    print("Tahun Lulus: ${tahunLulus ?? 'Belum diisi'}");
+    debugPrint("Tahun Lulus: ${tahunLulus ?? 'Belum diisi'}");
   }
 }
 
 // MIXIN
 mixin Mengajar {
   void mengajar() {
-    print("Sedang mengajar mahasiswa.");
+    debugPrint("Sedang mengajar mahasiswa.");
   }
 }
 
 mixin Meneliti {
   void meneliti() {
-    print("Sedang melakukan penelitian.");
+    debugPrint("Sedang melakukan penelitian.");
   }
 }
 
 mixin Administrasi {
   void urusAdministrasi() {
-    print("Sedang mengurus administrasi kampus.");
+    debugPrint("Sedang mengurus administrasi kampus.");
   }
 }
 
@@ -59,7 +60,7 @@ class Dosen extends Mahasiswa with Mengajar, Meneliti {
 
   void tampilkanDosen() {
     tampilkanData();
-    print("Mata Kuliah: ${mataKuliah ?? 'Belum diisi'}");
+    debugPrint("Mata Kuliah: ${mataKuliah ?? 'Belum diisi'}");
   }
 }
 
@@ -68,7 +69,7 @@ class Fakultas extends Mahasiswa with Administrasi {
 
   void tampilkanFakultas() {
     tampilkanData();
-    print("Nama Fakultas: ${namaFakultas ?? 'Belum diisi'}");
+    debugPrint("Nama Fakultas: ${namaFakultas ?? 'Belum diisi'}");
   }
 }
 
@@ -76,68 +77,68 @@ class Fakultas extends Mahasiswa with Administrasi {
 // MAIN
 
 void main() {
-  print("Pilih jenis:");
-  print("1. Mahasiswa Aktif");
-  print("2. Mahasiswa Alumni");
-  print("3. Dosen");
-  print("4. Fakultas");
+  debugPrint("Pilih jenis:");
+  debugPrint("1. Mahasiswa Aktif");
+  debugPrint("2. Mahasiswa Alumni");
+  debugPrint("3. Dosen");
+  debugPrint("4. Fakultas");
 
   String? pilihan = stdin.readLineSync();
 
   if (pilihan == "1") {
     MahasiswaAktif mahasiswa = MahasiswaAktif();
 
-    print("Masukkan Nama:");
+    debugPrint("Masukkan Nama:");
     mahasiswa.nama = stdin.readLineSync();
 
-    print("Masukkan NIM:");
+    debugPrint("Masukkan NIM:");
     mahasiswa.nim = int.tryParse(stdin.readLineSync() ?? '');
 
-    print("Masukkan Jurusan:");
+    debugPrint("Masukkan Jurusan:");
     mahasiswa.jurusan = stdin.readLineSync();
 
-    print("Masukkan Semester:");
+    debugPrint("Masukkan Semester:");
     mahasiswa.semester = int.tryParse(stdin.readLineSync() ?? '');
 
-    print("\n=== DATA MAHASISWA AKTIF ===");
+    debugPrint("\n=== DATA MAHASISWA AKTIF ===");
     mahasiswa.tampilkanData();
     mahasiswa.tampilkanStatus();
 
   } else if (pilihan == "2") {
     MahasiswaAlumni mahasiswa = MahasiswaAlumni();
 
-    print("Masukkan Nama:");
+    debugPrint("Masukkan Nama:");
     mahasiswa.nama = stdin.readLineSync();
 
-    print("Masukkan NIM:");
+    debugPrint("Masukkan NIM:");
     mahasiswa.nim = int.tryParse(stdin.readLineSync() ?? '');
 
-    print("Masukkan Jurusan:");
+    debugPrint("Masukkan Jurusan:");
     mahasiswa.jurusan = stdin.readLineSync();
 
-    print("Masukkan Tahun Lulus:");
+    debugPrint("Masukkan Tahun Lulus:");
     mahasiswa.tahunLulus = int.tryParse(stdin.readLineSync() ?? '');
 
-    print("\n=== DATA MAHASISWA ALUMNI ===");
+    debugPrint("\n=== DATA MAHASISWA ALUMNI ===");
     mahasiswa.tampilkanData();
     mahasiswa.tampilkanStatus();
 
   } else if (pilihan == "3") {
     Dosen dosen = Dosen();
 
-    print("Masukkan Nama:");
+    debugPrint("Masukkan Nama:");
     dosen.nama = stdin.readLineSync();
 
-    print("Masukkan NIM:");
+    debugPrint("Masukkan NIM:");
     dosen.nim = int.tryParse(stdin.readLineSync() ?? '');
 
-    print("Masukkan Jurusan:");
+    debugPrint("Masukkan Jurusan:");
     dosen.jurusan = stdin.readLineSync();
 
-    print("Masukkan Mata Kuliah:");
+    debugPrint("Masukkan Mata Kuliah:");
     dosen.mataKuliah = stdin.readLineSync();
 
-    print("\n=== DATA DOSEN ===");
+    debugPrint("\n=== DATA DOSEN ===");
     dosen.tampilkanDosen();
     dosen.mengajar();
     dosen.meneliti();
@@ -145,23 +146,23 @@ void main() {
   } else if (pilihan == "4") {
     Fakultas fakultas = Fakultas();
 
-    print("Masukkan Nama:");
+    debugPrint("Masukkan Nama:");
     fakultas.nama = stdin.readLineSync();
 
-    print("Masukkan NIM:");
+    debugPrint("Masukkan NIM:");
     fakultas.nim = int.tryParse(stdin.readLineSync() ?? '');
 
-    print("Masukkan Jurusan:");
+    debugPrint("Masukkan Jurusan:");
     fakultas.jurusan = stdin.readLineSync();
 
-    print("Masukkan Nama Fakultas:");
+    debugPrint("Masukkan Nama Fakultas:");
     fakultas.namaFakultas = stdin.readLineSync();
 
-    print("\n=== DATA FAKULTAS ===");
+    debugPrint("\n=== DATA FAKULTAS ===");
     fakultas.tampilkanFakultas();
     fakultas.urusAdministrasi();
 
   } else {
-    print("Pilihan tidak valid");
+    debugPrint("Pilihan tidak valid");
   }
 }
